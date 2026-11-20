@@ -1,0 +1,1170 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#ffeaf0">
+  <title>Tengo algo especial para ti 💌</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&family=Cormorant+Garamond:ital,wght@0,600;1,500;1,600&family=Quicksand:wght@500;600&display=swap" rel="stylesheet">
+  <style>
+/* =========================================================
+   Una carta para ti — estilos
+   Paleta: rosa pastel, crema y blanco
+   ========================================================== */
+
+:raíz {
+  --rosa: #e0597f;
+  --rose-deep: #b13f60;
+  --tinta: #5a3944;
+  --documento: #fff6e6;
+}
+
+*, *::antes, *::después { box-sizing: border-box; }
+
+html, body { margin: 0; height: 100%; }
+
+cuerpo {
+  font-family: 'Quicksand', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  color: var(--ink);
+  fondo: #ffeaf0;
+  desbordamiento: oculto;
+  -webkit-tap-highlight-color: transparente;
+  -webkit-font-smoothing: antialiased;
+}
+
+.sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
+
+/* ---------- Escena y fondo ---------- */
+
+.escena {
+  posición: fija;
+  recuadro: 0;
+  pantalla: flexible;
+  flex-direction: columna;
+  alinear-elementos: centro;
+  justificar-contenido: centro;
+  espacio: abrazadera(.5rem, 2.4vh, 1.5rem);
+  desbordamiento: oculto;
+  fondo:
+    radial-gradient(900px 600px al 12% 90%, rgba(255, 190, 210, .55), transparente 65%),
+    radial-gradient(800px 560px al 92% 75%, rgba(255, 222, 200, .55), transparente 65%),
+    radial-gradient(700px 500px al 85% 8%, rgba(255, 205, 225, .45), transparente 65%),
+    gradiente-lineal(165 grados, #ffeef3 0%, #fff7ec 52%, #ffe9f0 100%);
+}
+
+.bg-light {
+  posición: absoluta;
+  recuadro: -10%;
+  fondo: gradiente radial(40% 36% al 50% 40%, rgba(255, 255, 255, .95), rgba(255, 255, 255, 0) 70%);
+  animación: lightPulse 7s ease-in-out infinito;
+  eventos de puntero: ninguno;
+}
+
+/* Viñeta rosada que aparece cuando solo queda la carta */
+.bg-final {
+  posición: absoluta;
+  recuadro: 0;
+  opacidad: 0;
+  fondo:
+    gradiente radial(elipse al 50% 45%, rgba(255, 243, 246, 0) 25%, rgba(222, 128, 158, .32) 100%),
+    gradiente-lineal(160 grados, rgba(255, 214, 226, .45), rgba(255, 236, 224, .2));
+  transición: opacidad 2.2s facilidad;
+  eventos de puntero: ninguno;
+}
+.scene.final .bg-final { opacidad: 1; }
+
+.bokeh, .corazones {
+  posición: absoluta;
+  recuadro: 0;
+  desbordamiento: oculto;
+  eventos de puntero: ninguno;
+}
+
+.bokeh i {
+  posición: absoluta;
+  radio de borde: 50%;
+  fondo: radial-gradient(circle, rgba(255, 255, 255, .9), rgba(255, 206, 220, .25) 60%, transparent 70%);
+  filtro: desenfoque(6px);
+  animación: drift var(--dur) ease-in-out infinite alternate;
+}
+
+.corazón {
+  posición: absoluta;
+  parte inferior: -60px;
+  mostrar: bloque;
+  animación: ascenso var(--dur) lineal var(--delay) infinito;
+}
+.corazón svg {
+  mostrar: bloque;
+  ancho: 100%;
+  altura: 100%;
+  animación: balanceo var(--sw) entrada-salida infinita alternada;
+}
+
+/* ---------- Texto inicial ---------- */
+
+.introducción {
+  posición: relativa;
+  índice z: 3;
+  alineación de texto: centro;
+  relleno: 0 1.2rem;
+  transición: opacidad .9s de facilidad, transformación .9s de facilidad;
+}
+
+.intro h1 {
+  margen: 0 0 .7rem;
+  font-family: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  estilo de fuente: cursiva;
+  grosor de fuente: 600;
+  tamaño de fuente: clamp(1.9rem, 7.4vw, 3.3rem);
+  interlineado: 1,1;
+  color: var(--rose-deep);
+  text-shadow: 0 2px 14px rgba(255, 255, 255, .95);
+}
+
+.intro .mail { display: inline-block; animation: mailBob 2.4s ease-in-out infinite; }
+
+.pista {
+  mostrar: bloque en línea;
+  margen: 0;
+  relleno: 0,5 rem 1,15 rem;
+  grosor de fuente: 600;
+  tamaño de fuente: clamp(.9rem, 3.4vw, 1.05rem);
+  espaciado entre letras: 0,03em;
+  color: #a2556f;
+  fondo: rgba(255, 255, 255, .68);
+  borde: 1px sólido rgba(240, 170, 190, .6);
+  radio de borde: 999px;
+  filtro de fondo: desenfoque (6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+.hint .arrow { display: inline-block; margin-left: .2rem; animation: arrowBob 1.4s ease-in-out infinite; }
+
+.escena.caminando .introducción {
+  opacidad: 0;
+  transformar: trasladarY(-14px) escala(.98);
+  eventos de puntero: ninguno;
+}
+
+/* ---------- Gatito ---------- */
+
+.escenario {
+  --w: min(76vw, cálculo(56vh * .8), 380px);
+  posición: relativa;
+  índice z: 2;
+  flex: ninguno;
+  ancho: var(--w);
+  relación de aspecto: 4 / 5;
+  tamaño de fuente: calc(var(--w) / 40); /* 1em = 1/40 del ancho del gatito */
+}
+
+.brillo {
+  posición: absoluta;
+  izquierda: 50%;
+  superior: 52%;
+  ancho: 150%;
+  relación de aspecto: 1;
+  margen: 0;
+  transformar: traducir(-50%, -50%);
+  radio de borde: 50%;
+  fondo: radial-gradient(circle, rgba(255, 255, 255, .85) 0%, rgba(255, 226, 235, .55) 35%, transparent 66%);
+  animación: glowPulse 5s ease-in-out infinite alterna;
+  eventos de puntero: ninguno;
+}
+
+.cat-btn {
+  posición: absoluta;
+  recuadro: 0;
+  cursor: puntero;
+  esquema: ninguno;
+  radio de borde: 2em;
+  transición: transformar .35s cubic-bezier(.3, 1.4, .5, 1);
+}
+.cat-btn:hover { transform: translateY(-.5em) scale(1.025); }
+.cat-btn:focus-visible { outline: 3px dashed #e86a8f; outline-offset: 6px; }
+.stage.busy .cat-btn { pointer-events: none; cursor: default; transform: none; }
+
+.cat-inner {
+  posición: absoluta;
+  recuadro: 0;
+  transform-origin: 50% 96%;
+  animación: respirar 4,2 s entrada y salida suave infinita;
+}
+
+svg.cat {
+  posición: absoluta;
+  recuadro: 0;
+  ancho: 100%;
+  altura: 100%;
+  desbordamiento: visible;
+}
+.cat-back { z-index: 1; }
+.cat-paws { z-index: 3; pointer-events: none; }
+
+/* Animaciones idle del gatito */
+.tail { transform-origin: 285px 440px; animation: tail 3.2s ease-in-out infinite; }
+.head { transform-origin: 200px 262px; animation: headIdle 6s ease-in-out infinite; }
+.ear-l { transform-origin: 138px 100px; animation: earL 6.5s ease-in-out infinite; }
+.ear-r { transform-origin: 262px 100px; animation: earR 8s ease-in-out infinite; }
+.eye-l { transform-origin: 146px 168px; animation: blink 5s infinite; }
+.eye-r { transform-origin: 254px 168px; animation: blink 5s infinite; }
+.eyes-look { transform: translate(var(--ex, 0px), var(--ey, 0px)); transition: transform .2s ease-out; }
+
+.ojos-felices, .boca-abierta { mostrar: ninguno; }
+.cat.happy .eyes-look, .cat.happy .mouth-smile { display: none; }
+.cat.happy .eyes-happy, .cat.happy .mouth-open { display: inline; }
+.cat.happy .blush { opacidad: .85; }
+.blush { transición: opacidad .6s ease; }
+
+/* Caminando hacia la pantalla */
+.stage.walking .tail { animation-duration: .8s; }
+.stage.walking .head { animación: headBob .62s ease-in-out infinite; }
+.stage.walking .ear-l { animación: earFlopL .62s ease-in-out infinite; }
+.stage.walking .ear-r { animación: earFlopR .62s ease-in-out infinite; }
+.stage.walking .foot-l { animación: paso .62s ease-in-out infinito; }
+.stage.walking .foot-r { animación: paso .62s ease-in-out -.31s infinito; }
+
+/* ---------- Sobre ---------- */
+
+.sobre {
+  posición: absoluta;
+  índice z: 2;
+  izquierda: 26,25%;
+  superior: 61%;
+  ancho: 47,5%;
+  altura: 25%;
+  perspectiva: 30em;
+  transform-origin: 50% 100%;
+}
+.envelope.wiggle { animación: wiggle .6s ease-in-out; }
+
+.env-back {
+  posición: absoluta;
+  recuadro: 0;
+  índice z: 0;
+  radio de borde: .5em .5em .8em .8em;
+  fondo: gradiente lineal(180 grados, #e88aa6, #f2a3b9);
+  sombra de cuadro: 0 .7em 1.2em -.5em rgba(160, 50, 90, .35);
+}
+
+.env-front {
+  posición: absoluta;
+  recuadro: 0;
+  índice z: 3;
+  ancho: 100%;
+  altura: 100%;
+  radio de borde: .5em .5em .8em .8em;
+  desbordamiento: visible;
+}
+
+.env-letter {
+  posición: absoluta;
+  índice z: 2;
+  izquierda: 6%;
+  derecha: 6%;
+  superior: 3%;
+  altura: 94%;
+  radio de borde: .25em;
+  fondo: gradiente lineal(180 grados, #fffaf0, #ffefd9);
+  box-shadow: 0 0 0 1px rgba(214, 160, 150, .3);
+  transformar: translateY(0);
+  transición: transformar 1.3s cubic-bezier(.3, .8, .25, 1) .5s;
+}
+.envelope.open .env-letter { transform: translateY(-52%); }
+.env-letter .fold {
+  posición: absoluta;
+  izquierda: 0; derecha: 0; arriba: 50%;
+  altura: 1px;
+  fondo: rgba(205, 150, 150, .4);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, .8);
+}
+.env-letter .mini-heart {
+  posición: absoluta;
+  izquierda: 50%; arriba: 14%;
+  ancho: 14%;
+  transformar: trasladarX(-50%);
+  color: #ec8aa8;
+}
+
+.flap {
+  posición: absoluta;
+  índice z: 4;
+  izquierda: 0; arriba: 0;
+  ancho: 100%;
+  altura: 55,2%;
+  transform-origin: 50% 0;
+  transición: transformar .9s cubic-bezier(.45, 0, .3, 1);
+}
+.envelope.open .flap { transform: rotateX(-180deg); }
+.flap.behind { z-index: 1; }
+
+.flap-shape { display: block; width: 100%; height: 100%; overflow: visible; }
+.polígono con forma de solapa {
+  relleno: #f39ab4;
+  accidente cerebrovascular: #e57b9c;
+  grosor del trazo: 1,5;
+  trazo-línea-unión: redondo;
+}
+.flap.behind .flap-shape polygon { fill: #fcd9e3; }
+
+.sello {
+  posición: absoluta;
+  izquierda: 50%; arriba: 62%;
+  ancho: 15%;
+  relación de aspecto: 1;
+  transformar: traducir(-50%, -50%);
+  mostrar: cuadrícula;
+  elementos de lugar: centro;
+  radio de borde: 50%;
+  color: #ffe3ea;
+  fondo: radial-gradient(círculo al 35% 30%, #ff7d9d, #d93a63);
+  box-shadow: 0 .15em .4em rgba(120, 20, 50, .35);
+}
+.seal svg { ancho: 56%; alto: 56%; }
+.flap.behind .seal { opacity: 0; }
+
+/* ---------- Destellos ---------- */
+
+.fx { posición: absoluta; margen: 0; índice z: 6; eventos de puntero: ninguno; desbordamiento: visible; }
+.fx-item { position: absolute; display: block; opacity: 0; }
+.fx-item.spark {
+  fondo: gradiente radial(círculo, #fff 0, #ffeab0 45%, #ffbdd2 100%);
+  ruta de recorte: polígono(50% 0, 61% 39%, 100% 50%, 61% 61%, 50% 100%, 39% 61%, 0 50%, 39% 39%);
+}
+.fx-item.fx-heart svg { display: block; width: 100%; height: 100%; }
+
+/* ---------- La carta final ---------- */
+
+.papel-envoltura {
+  posición: fija;
+  recuadro: 0;
+  índice z: 20;
+  mostrar: cuadrícula;
+  elementos de lugar: centro;
+  visibilidad: oculta;
+  eventos de puntero: ninguno;
+}
+.paper-wrap.show { visibility: visible; }
+.paper-wrap.ready .paper { pointer-events: auto; }
+
+.papel {
+  posición: relativa;
+  ancho: min(92vw, 640px);
+  altura: min(84vh, 760px);
+  altura: min(84dvh, 760px);
+  radio de borde: 6px;
+  fondo: gradiente lineal(180 grados, #fffaf1 0%, #fff4e2 100%);
+  sombra de caja:
+    0 1px 0 rgba(255, 255, 255, .8) inset,
+    0 40px 80px -30px rgba(140, 50, 85, .45),
+    0 12px 28px -8px rgba(140, 50, 85, .22),
+    0 0 0 1px rgba(224, 170, 160, .35);
+}
+.paper::before {
+  contenido: '';
+  posición: absoluta;
+  recuadro: 0;
+  radio de borde: heredar;
+  background-image: radial-gradient(rgba(190, 140, 110, .09) 1px, transparent 1.3px);
+  background-size: 5px 5px;
+  eventos de puntero: ninguno;
+}
+
+.paper-frame {
+  posición: absoluta;
+  inset: clamp(10px, 2.4vw, 18px);
+  borde: 1,5px sólido rgba(222, 138, 163, .6);
+  radio de borde: 3px;
+  eventos de puntero: ninguno;
+}
+.paper-frame::after {
+  contenido: '';
+  posición: absoluta;
+  margen: 4px;
+  borde: 1px sólido rgba(222, 138, 163, .3);
+  radio de borde: 2px;
+}
+.esquina {
+  posición: absoluta;
+  ancho: 20px;
+  altura: 20px;
+  relleno: 3px;
+  radio de borde: 50%;
+  color: #e48aa7;
+  fondo: #fff7ea;
+}
+.corner.tl { left: 0; top: 0; transform: translate(-50%, -50%) rotate(-15deg); }
+.corner.tr { right: 0; top: 0; transform: translate(50%, -50%) rotate(15deg); }
+.corner.bl { left: 0; bottom: 0; transform: translate(-50%, 50%) rotate(15deg); }
+.corner.br { right: 0; bottom: 0; transform: translate(50%, 50%) rotate(-15deg); }
+
+.paper-inner {
+  posición: absoluta;
+  inset: clamp(10px, 2.4vw, 18px);
+  acolchado: abrazadera(1,6rem, 6vw, 3,2rem) abrazadera(1,3rem, 5,5vw, 3rem);
+  desbordamiento-y: automático;
+  ancho de la barra de desplazamiento: ninguno;
+}
+.paper-inner::-webkit-scrollbar { display: none; }
+
+.título-del-documento {
+  margen: 0;
+  altura mínima: 1,15em;
+  alineación de texto: centro;
+  font-family: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  estilo de fuente: cursiva;
+  grosor de fuente: 600;
+  tamaño de fuente: clamp(1.7rem, 6.4vw, 2.7rem);
+  interlineado: 1,15;
+  color: var(--rose-deep);
+}
+
+.divider {
+  pantalla: flexible;
+  alinear-elementos: centro;
+  justificar-contenido: centro;
+  brecha: .7rem;
+  ancho: 70%;
+  margen: .9rem automático 1.3rem;
+  opacidad: 0;
+  transformar: escalaX(.6);
+  transición: opacidad 1s de facilidad, transformación 1s de facilidad;
+}
+.divider.show { opacity: 1; transform: none; }
+.divider::before, .divider::after {
+  contenido: '';
+  flex: 1;
+  altura: 1px;
+  fondo: gradiente lineal(90 grados, transparente, rgba(214, 120, 150, .6));
+}
+.divider::after { transform: scaleX(-1); }
+.divider svg { ancho: 16px; alto: 16px; color: #e0708f; }
+
+.cuerpo del papel p,
+.sign p {
+  margen: 0 0 .75em;
+  font-family: 'Caveat', 'Segoe Script', 'Bradley Hand', cursive;
+  grosor de fuente: 500;
+  tamaño de fuente: clamp(1.3rem, 4.7vw, 1.8rem);
+  interlineado: 1,5;
+  color: var(--ink);
+  ajuste de texto: bonito;
+}
+
+.sign { margin-top: 1.1em; text-align: right; }
+.sign p { margin-bottom: .1em; }
+.sign .name {
+  grosor de fuente: 600;
+  tamaño de fuente: clamp(1.5rem, 5.4vw, 2.1rem);
+  color: var(--rose-deep);
+}
+.fin-corazón {
+  mostrar: bloque en línea;
+  ancho: 0,8em;
+  altura: 0,8em;
+  margen izquierdo: .25em;
+  alineación vertical: -.05em;
+  color: #e0708f;
+  opacidad: 0;
+  transición: opacidad .8s facilidad;
+}
+.end-heart.show { opacidad: 1; animación: latido del corazón 1.6s ease-in-out infinite; }
+.end-heart svg { display: block; width: 100%; height: 100%; }
+
+/* Texto que se "escribe" letra por letra */
+.w { white-space: nowrap; }
+.c { opacidad: 0; }
+.c.on { opacidad: 1; transición: opacidad .35s ease; }
+
+.caret {
+  posición: relativa;
+  mostrar: bloque en línea;
+  ancho: 0;
+  altura: 0;
+}
+.caret::after {
+  contenido: '';
+  posición: absoluta;
+  izquierda: 2px;
+  parte inferior: -.2em;
+  ancho: 2px;
+  altura: 1,05em;
+  radio de borde: 2px;
+  fondo: var(--rosa);
+  animación: caretBlink 1s pasos(1) infinito;
+}
+
+.reproducir {
+  posición: fija;
+  izquierda: 50%;
+  parte inferior: max(12px, env(safe-area-inset-bottom));
+  Índice z: 30;
+  transformar: trasladarX(-50%);
+  relleno: 0,5 rem 1 rem;
+  borde: 0;
+  radio de borde: 999px;
+  fuente: 600 .85rem 'Quicksand', system-ui, sans-serif;
+  color: var(--rose-deep);
+  fondo: rgba(255, 255, 255, .72);
+  filtro de fondo: desenfoque (6px);
+  -webkit-backdrop-filter: blur(6px);
+  cursor: puntero;
+  opacidad: 0;
+  eventos de puntero: ninguno;
+  transición: opacidad 1s facilidad;
+}
+.replay.show { opacity: 1; pointer-events: auto; }
+.replay:focus-visible { outline: 3px dashed #e86a8f; outline-offset: 3px; }
+
+/* ---------- Fotogramas clave ---------- */
+
+@keyframes lightPulse { 0%, 100% { opacidad: .75; } 50% { opacidad: 1; } }
+@keyframes glowPulse { from { opacity: .7; } to { opacity: 1; } }
+@keyframes mailBob { 0%, 100% { transform: translateY(0) rotate(-6deg); } 50% { transform: translateY(-4px) rotate(6deg); } }
+@keyframes arrowBob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(5px); } }
+@keyframes breathe { 0%, 100% { transform: scale(1, 1); } 50% { transform: scale(1.008, 1.018); } }
+
+@keyframes tail { 0%, 100% { transform: rotate(-5deg); } 50% { transform: rotate(9deg); } }
+@keyframes headIdle { 0%, 100% { transform: rotate(0); } 30% { transform: rotate(-2.2deg); } 65% { transform: rotate(2deg); } }
+@keyframes earL { 0%, 58%, 72%, 100% { transform: rotate(0); } 62% { transform: rotate(-9deg); } 66% { transform: rotate(3deg); } }
+@keyframes earR { 0%, 30%, 44%, 100% { transform: rotate(0); } 34% { transform: rotate(9deg); } 38% { transform: rotate(-3deg); } }
+@keyframes blink { 0%, 92%, 100% { transform: scaleY(1); } 95% { transform: scaleY(.08); } }
+
+@keyframes headBob { 0%, 100% { transform: translateY(0) rotate(-2.5deg); } 50% { transform: translateY(-5px) rotate(2.5deg); } }
+@keyframes earFlopL { 0%, 100% { transform: rotate(0); } 50% { transform: rotate(-6deg); } }
+@keyframes earFlopR { 0%, 100% { transform: rotate(0); } 50% { transform: rotate(6deg); } }
+@keyframes step { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-9px); } }
+
+@keyframes wiggle {
+  0%, 100% { transformar: rotar(0); }
+  20% { transformar: rotar(-2.5 grados); }
+  40% { transformar: rotar(2.5 grados); }
+  60% { transformar: rotar(-1.5 grados); }
+  80% { transformar: rotar(1.5 grados); }
+}
+
+@keyframes rise {
+  0% { transform: translate3d(0, 0, 0) scale(.8); opacity: 0; }
+  12% { opacidad: var(--o); }
+  85% { opacidad: var(--o); }
+  100% { transform: translate3d(0, calc(-100vh - 140px), 0) scale(1.1); opacity: 0; }
+}
+@keyframes sway {
+  de { transformar: traducirX(calc(var(--amp) * -1)) rotar(-12 grados); }
+  a { transformar: trasladarX(var(--amp)) rotar(12 grados); }
+}
+@keyframes drift {
+  de { transformar: trasladar(0, 0) escalar(1); }
+  a { transformar: traducir(var(--mx), var(--my)) escalar(1.15); }
+}
+@keyframes caretBlink { 0%, 55% { opacidad: 1; } 56%, 100% { opacidad: 0; } }
+@keyframes heartbeat { 0%, 100% { transform: scale(1); } 15% { transform: scale(1.22); } 30% { transform: scale(1); } 45% { transform: scale(1.14); } }
+
+/* ---------- Pantallas bajas en horizontal ---------- */
+
+@media (max-height: 520px) y (orientation: landscape) {
+  .scene { flex-direction: row; gap: 5vw; }
+  .stage { --w: min(40vw, calc(80vh * .8)); }
+  .intro { max-width: 42vw; }
+  .intro h1 { font-size: clamp(1.4rem, 4vw, 2.2rem); }
+}
+
+/* ---------- Movimiento reducido ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .cat-inner, .tail, .head, .ear-l, .ear-r, .eye-l, .eye-r,
+  .corazón, .corazón svg, .bokeh i, .brillo, .luz de fondo, .correo, .flecha {
+    animación: ninguna !importante;
+  }
+}
+  </style>
+</head>
+<cuerpo>
+
+  <!-- Corazón reutilizable -->
+  <svg class="sprite" aria-hidden="true" focusable="false">
+    <symbol id="heart" viewBox="0 0 24 24">
+      <path fill="currentColor" d="M12 21.2s-8.2-5-10.4-10.2C.2 7.6 2.3 3.8 6.2 3.8c2.1 0 3.9 1.1 5.8 3.2 1.9-2.1 3.7-3.2 5.8-3.2 3.9 0 6 3.8 4.6 7.2C20.2 16.2 12 21.2 12 21.2z"/>
+    </símbolo>
+  </svg>
+
+  <main class="scene" id="scene">
+
+    <!-- Fondo -->
+    <div class="bg-light" aria-hidden="true"></div>
+    <div class="bg-final" aria-hidden="true"></div>
+    <div class="bokeh" id="bokeh" aria-hidden="true"></div>
+    <div class="hearts" id="hearts" aria-hidden="true"></div>
+
+    <!-- Texto inicial -->
+    <header class="intro" id="intro">
+      <h1>Tengo algo especial para ti <span class="mail" aria-hidden="true">💌</span></h1>
+      <p class="hint">Haz clic en el gatito <span class="arrow" aria-hidden="true">↓</span></p>
+    </header>
+
+    <!-- Gatito + sobre -->
+    <div class="stage" id="stage">
+      <div class="glow" aria-hidden="true"></div>
+
+      <div class="cat-btn" id="catBtn" role="button" tabindex="0"
+           aria-label="Gatito con una carta de amor. Haz clic para recibirla">
+        <div class="cat-inner">
+
+          <!-- Capa trasera: cola, cuerpo, cabeza -->
+          <svg class="cat cat-back" id="catSvg" viewBox="0 0 400 500" aria-hidden="true">
+            <defs>
+              <linearGradient id="fur" gradientUnits="userSpaceOnUse" x1="0" y1="30" x2="0" y2="490">
+                <stop offset="0" stop-color="#fddcb8"/>
+                <stop offset="1" stop-color="#f0b985"/>
+              </linearGradient>
+              <radialGradient id="cream" cx=".5" cy=".4" r=".75">
+                <stop offset="0" stop-color="#fffbf3"/>
+                <stop offset="1" stop-color="#fdeedb"/>
+              </gradienteradial>
+              <radialGradient id="iris" cx=".5" cy=".3" r=".8">
+                <stop offset="0" stop-color="#8b5a49"/>
+                <stop offset=".5" stop-color="#40242f"/>
+                <stop offset="1" stop-color="#22111d"/>
+              </gradienteradial>
+            </defs>
+
+            <ellipse cx="200" cy="487" rx="150" ry="12" fill="#d77c98" opacity=".25"/>
+
+            <!-- Cola -->
+            <g class="tail">
+              <path d="M285 440 C355 452 396 400 369 352" fill="none" stroke="#d38c5f" stroke-width="32" stroke-linecap="round"/>
+              <path d="M285 440 C355 452 396 400 369 352" fill="none" stroke="url(#fur)" stroke-width="26" stroke-linecap="round"/>
+              <path d="M285 440 C355 452 396 400 369 352" fill="none" stroke="#e8a572" stroke-width="26" pathLength="100" stroke-dasharray="4 13"/>
+              <path d="M285 440 C355 452 396 400 369 352" fill="none" stroke="#fff6e6" stroke-width="26" stroke-linecap="round" pathLength="100" stroke-dasharray="7 200" stroke-dashoffset="-93"/>
+            </g>
+
+            <!-- Cuerpo -->
+            <ellipse cx="200" cy="378" rx="118" ry="108" fill="url(#fur)" stroke="#d38c5f" stroke-width="3"/>
+            <g stroke="#e3a06f" stroke-width="6" stroke-linecap="round" fill="none" opacity=".85">
+              <path d="M86 345 q10 4 19 1"/><path d="M83 372 q12 4 22 0"/><path d="M88 399 q10 3 19 -1"/>
+              <path d="M314 345 q-10 4 -19 1"/><path d="M317 372 q-12 4 -22 0"/><path d="M312 399 q-10 3 -19 -1"/>
+            </g>
+            <ellipse cx="200" cy="290" rx="100" ry="50" fill="url(#fur)" stroke="#d38c5f" stroke-width="3"/>
+            <ellipse cx="200" cy="292" rx="56" ry="30" fill="url(#cream)"/>
+
+            <!-- Patitas traseras -->
+            <g class="foot foot-l">
+              <ellipse cx="146" cy="478" rx="38" ry="19" fill="url(#cream)" stroke="#d38c5f" stroke-width="3"/>
+              <path d="M132 474v9M146 472v11M160 474v9" stroke="#dcae92" stroke-width="2.6" stroke-linecap="round" fill="none"/>
+            </g>
+            <g class="foot foot-r">
+              <ellipse cx="254" cy="478" rx="38" ry="19" fill="url(#cream)" stroke="#d38c5f" stroke-width="3"/>
+              <path d="M240 474v9M254 472v11M268 474v9" stroke="#dcae92" stroke-width="2.6" stroke-linecap="round" fill="none"/>
+            </g>
+
+            <!-- Cabeza -->
+            <g class="head">
+              <g class="ear ear-l">
+                <path d="M104 150 Q76 78 95 37 Q100 31 108 35 Q158 56 186 98 Z" fill="url(#fur)" stroke="#d38c5f" stroke-width="3" stroke-linejoin="round"/>
+                <path d="M110 128 Q92 82 103 54 Q142 68 168 100 Z" fill="#f7a9bd"/>
+              </g>
+              <g class="ear ear-r">
+                <path d="M296 150 Q324 78 305 37 Q300 31 292 35 Q242 56 214 98 Z" fill="url(#fur)" stroke="#d38c5f" stroke-width="3" stroke-linejoin="round"/>
+                <path d="M290 128 Q308 82 297 54 Q258 68 232 100 Z" fill="#f7a9bd"/>
+              </g>
+
+              <ellipse cx="200" cy="180" rx="114" ry="92" fill="url(#fur)" stroke="#d38c5f" stroke-width="3"/>
+              <g stroke="#e3a06f" stroke-width="6" stroke-linecap="round" fill="none">
+                <path d="M200 94 v20"/><path d="M174 98 q4 11 7 19"/><path d="M226 98 q-4 11 -7 19"/>
+              </g>
+
+              <!-- Hocico -->
+              <ellipse cx="200" cy="212" rx="34" ry="22" fill="url(#cream)"/>
+              <circle cx="181" cy="219" r="25" fill="url(#cream)"/>
+              <circle cx="219" cy="219" r="25" fill="url(#cream)"/>
+
+              <!-- Ojos -->
+              <g class="eyes-look" id="eyes">
+                <g class="eye eye-l">
+                  <ellipse cx="146" cy="168" rx="22" ry="28" fill="url(#iris)"/>
+                  <ellipse cx="146" cy="182" rx="13" ry="10" fill="#b4766a" opacity=".35"/>
+                  <circle cx="138" cy="157" r="8" fill="#fff"/>
+                  <circle cx="155" cy="182" r="3.8" fill="#fff" opacity=".92"/>
+                  <path d="M126 152 q-8 -2 -13 -11 M124 163 q-9 0 -15 -7" fill="none" stroke="#3a2230" stroke-width="3" stroke-linecap="round"/>
+                </g>
+                <g class="eye eye-r">
+                  <ellipse cx="254" cy="168" rx="22" ry="28" fill="url(#iris)"/>
+                  <ellipse cx="254" cy="182" rx="13" ry="10" fill="#b4766a" opacity=".35"/>
+                  <circle cx="246" cy="157" r="8" fill="#fff"/>
+                  <circle cx="263" cy="182" r="3.8" fill="#fff" opacity=".92"/>
+                  <path d="M274 152 q8 -2 13 -11 M276 163 q9 0 15 -7" fill="none" stroke="#3a2230" stroke-width="3" stroke-linecap="round"/>
+                </g>
+              </g>
+              <!-- Ojitos felices (aparecen al abrir el sobre) -->
+              <g class="eyes-happy" fill="none" stroke="#3a2230" stroke-width="5.5" stroke-linecap="round">
+                <path d="M124 176 Q146 150 168 176"/>
+                <path d="M232 176 Q254 150 276 176"/>
+              </g>
+
+              <g class="blush" fill="#ff8fab" opacity=".5">
+                <ellipse cx="108" cy="205" rx="19" ry="10.5"/>
+                <ellipse cx="292" cy="205" rx="19" ry="10.5"/>
+              </g>
+
+              <!-- Nariz y boca -->
+              <path d="M189 195 Q200 188 211 195 Q207 206 200 209 Q193 206 189 195Z" fill="#f48aa3" stroke="#e0728f" stroke-width="1.5" stroke-linejoin="round"/>
+              <ellipse cx="196" cy="195" rx="3" ry="1.6" fill="#fff" opacity=".6"/>
+              <path class="mouth-smile" d="M200 209 V215 M200 215 Q190 226 178 218 M200 215 Q210 226 222 218" fill="none" stroke="#b5657a" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
+              <g class="boca-abierta">
+                <path d="M200 209 V214" stroke="#b5657a" stroke-width="3.2" stroke-linecap="round"/>
+                <path d="M183 216 Q200 244 217 216 Q200 222 183 216Z" fill="#c9475f"/>
+                <ellipse cx="200" cy="225" rx="8" ry="4.5" fill="#ff8fa5"/>
+              </g>
+
+              <!-- Intolerantes -->
+              <g stroke="#b98c70" stroke-width="2.4" stroke-linecap="round" opacity=".85" fill="none">
+                <path d="M112 204 L52 194"/><path d="M110 214 L48 218"/><path d="M114 224 L58 240"/>
+                <path d="M288 204 L348 194"/><path d="M290 214 L352 218"/><path d="M286 224 L342 240"/>
+              </g>
+            </g>
+          </svg>
+
+          <!-- Sobre -->
+          <div class="envelope" id="envelope">
+            <div class="env-back"></div>
+
+            <div class="flap" id="flap">
+              <svg class="flap-shape" viewBox="0 0 190 69" preserveAspectRatio="none" aria-hidden="true">
+                <polygon points="1,1 189,1 95,68"/>
+              </svg>
+              <span class="seal"><svg viewBox="0 0 24 24"><use href="#heart"/></svg></span>
+            </div>
+
+            <!-- La carta plegada: no muestra ningún texto -->
+            <div class="env-letter" id="envLetter">
+              <span class="fold"></span>
+              <svg class="mini-heart" viewBox="0 0 24 24" aria-hidden="true"><use href="#heart"/></svg>
+            </div>
+
+            <svg class="env-front" viewBox="0 0 190 125" preserveAspectRatio="none" aria-hidden="true">
+              <path d="M0 0 L98 62 L0 125 Z" fill="#f9bccb" stroke="#ee9db4" stroke-width="1"/>
+              <path d="M190 0 L92 62 L190 125 Z" fill="#f8b3c4" stroke="#ee9db4" stroke-width="1"/>
+              <path d="M0 125 L95 55 L190 125 Z" fill="#fdd0db" stroke="#ee9db4" stroke-width="1"/>
+            </svg>
+          </div>
+
+          <!-- Capa delantera: brazos y patitas que sujetan el sobre -->
+          <svg class="cat cat-paws" viewBox="0 0 400 500" aria-hidden="true">
+            <g fill="none" stroke-linecap="round">
+              <path d="M112 278 C94 298 98 312 122 326" stroke="#d38c5f" stroke-width="50"/>
+              <path d="M112 278 C94 298 98 312 122 326" stroke="url(#fur)" stroke-width="44"/>
+              <path d="M288 278 C306 298 302 312 278 326" stroke="#d38c5f" stroke-width="50"/>
+              <path d="M288 278 C306 298 302 312 278 326" stroke="url(#fur)" stroke-width="44"/>
+            </g>
+            <g class="paw paw-l">
+              <ellipse cx="124" cy="324" rx="30" ry="23" fill="url(#cream)" stroke="#d38c5f" stroke-width="3"/>
+              <path d="M112 328 v10 M124 331 v10 M136 328 v10" stroke="#dcae92" stroke-width="2.6" stroke-linecap="round" fill="none"/>
+            </g>
+            <g class="paw paw-r">
+              <ellipse cx="276" cy="324" rx="30" ry="23" fill="url(#cream)" stroke="#d38c5f" stroke-width="3"/>
+              <path d="M264 328 v10 M276 331 v10 M288 328 v10" stroke="#dcae92" stroke-width="2.6" stroke-linecap="round" fill="none"/>
+            </g>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Destellos y corazoncitos (los crea el script) -->
+      <div class="fx" id="fx" aria-hidden="true"></div>
+    </div>
+
+    <!-- Escena final: solo la carta. Su contenido lo escribe el guión -->
+    <section class="paper-wrap" id="paperWrap">
+      <article class="paper" id="paper">
+        <div class="paper-frame">
+          <svg class="corner tl" viewBox="0 0 24 24" aria-hidden="true"><use href="#heart"/></svg>
+          <svg class="corner tr" viewBox="0 0 24 24" aria-hidden="true"><use href="#heart"/></svg>
+          <svg class="corner bl" viewBox="0 0 24 24" aria-hidden="true"><use href="#heart"/></svg>
+          <svg class="corner br" viewBox="0 0 24 24" aria-hidden="true"><use href="#heart"/></svg>
+        </div>
+        <div class="paper-inner" id="paperInner">
+          <h2 class="paper-title" id="paperTitle"></h2>
+          <div class="divider" id="divider" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><use href="#heart"/></svg>
+          </div>
+          <div class="paper-body" id="paperBody"></div>
+          <div class="sign" id="paperSign"></div>
+        </div>
+      </artículo>
+    </section>
+
+    <button class="replay" id="replay" type="button">Volver al inicio</button>
+  </main>
+
+  <script>
+(() => {
+  'usar estricto';
+
+  /* =========================================================
+     ✎ PERSONALIZA TU CARTA AQUÍ
+     ---------------------------------------------------------
+     También puedes cambiarla sin tocar el código, por la URL:
+       index.html?para=Lucía&de=Carlos
+       index.html?mensaje=Primer párrafo|Segundo párrafo
+     ========================================================== */
+  const CONFIG = {
+    título: 'Para mi hermosa Luz dueña de mi corazon…',
+    mensaje: [
+      'Perdoname, mi niña hermosa, por no haber tenido cuidado jamas quisiera lastimarte.',
+      'Contigo hasta lo más cotidiano se siente como un pequeño milagro: un mensaje tuyo, tu risa, tu manera de mirarme son cosas que amo y que quiero cuidar todos los dias.',
+      'Por eso le pedí a este gatito que te trajera mi carta... para que nunca olvides lo mucho que te quiero y amo, y aunque no puedo borrar aquel error voy a demostrarte todos los dias cuanto te amo.'
+    ],
+    despedida: 'Con todo mi amor y corazon',
+    remitente: 'Alguien que te ama mucho.',
+    velocidad: 40 // milisegundos por letra (más bajo = más rápido)
+  };
+
+  const params = new URLSearchParams(location.search);
+  if (params.get('para')) CONFIG.titulo = `Para ${params.get('para')}…`;
+  if (params.get('de')) CONFIG.remitente = params.get('de');
+  si (params.get('mensaje')) {
+    const parrafos = params.get('mensaje').split('|').map(s => s.trim()).filter(Boolean);
+    if (parrafos.length) CONFIG.mensaje = parrafos;
+  }
+
+  /* ---------- Utilidades ---------- */
+
+  const $ = (sel, root = document) => root.querySelector(sel);
+  const sleep = ms => new Promise(r => setTimeout(r, ms));
+  const rand = (a, b) => a + Math.random() * (b - a);
+  const pick = arr => arr[Math.floor(Math.random() * arr.length)];
+  const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
+  const done = anim => anim.finished.catch(() => {});
+  const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const CORAZÓN = '<svg viewBox="0 0 24 24" aria-hidden="true"><use href="#heart"/></svg>';
+
+  const escena = $('#escena');
+  const stage = $('#stage');
+  const catBtn = $('#catBtn');
+  const catSvg = $('#catSvg');
+  const ojos = $('#ojos');
+  const sobre = $('#sobre');
+  const flap = $('#flap');
+  const envLetter = $('#envLetter');
+  const fx = $('#fx');
+  const heartsBox = $('#hearts');
+  const bokehBox = $('#bokeh');
+  const paperWrap = $('#paperWrap');
+  const papel = $('#papel');
+  const papelInner = $('#papelInner');
+  const titleEl = $('#paperTitle');
+  const divisor = $('#divider');
+  const bodyEl = $('#paperBody');
+  const signEl = $('#paperSign');
+  const replay = $('#replay');
+
+  /* Estado: evita que la animación se active más de una vez */
+  sea ​​estado = 'inactivo';
+
+  /* ---------- Fondo: corazones flotantes y luces suaves ---------- */
+
+  función makeHearts() {
+    const colors = ['#ffb3c6', '#ff8fab', '#ffc2d1', '#f9a8c0', '#ffcfa8'];
+    constante n = ancho interno < 600? 14:24;
+    para (sea i = 0; i < n; i++) {
+      const tamaño = rand(12, 34);
+      const dur = rand(11, 22);
+      const h = document.createElement('span');
+      h.className = 'corazón';
+      h.style.cssText =
+        `left:${rand(-2, 100)}%;width:${size}px;height:${size}px;color:${pick(colors)};` +
+        `--dur:${dur}s;--delay:${-rand(0, dur)}s;--sw:${rand(2.5, 5)}s;--amp:${rand(10, 34)}px;` +
+        `--o:${rand(.25, .7)};filter:blur(${size < 17 ? 1.2 : 0}px)`;
+      h.innerHTML = CORAZÓN;
+      heartsBox.append(h);
+    }
+  }
+
+  función makeBokeh() {
+    para (sea i = 0; i < 9; i++) {
+      const s = rand(70, 210);
+      const b = document.createElement('i');
+      b.style.cssText =
+        `left:${rand(-5, 95)}%;top:${rand(-5, 95)}%;width:${s}px;height:${s}px;opacity:${rand(.25, .55)};` +
+        `--dur:${rand(9, 18)}s;--mx:${rand(-40, 40)}px;--my:${rand(-40, 40)}px`;
+      bokehBox.append(b);
+    }
+  }
+
+  /* ---------- Los ojitos siguen el cursor ---------- */
+
+  addEventListener('pointermove', e => {
+    si (estado !== 'inactivo') regresar;
+    const r = stage.getBoundingClientRect();
+    const nx = clamp((e.clientX - (r.left + r.width / 2)) / (innerWidth / 2), -1, 1);
+    const ny = clamp((e.clientY - (r.top + r.height / 2)) / (innerHeight / 2), -1, 1);
+    eyes.style.setProperty('--ex', (nx * 4.5).toFixed(1) + 'px');
+    eyes.style.setProperty('--ey', (ny * 3.5).toFixed(1) + 'px');
+  });
+
+  /* ---------- Destellos y corazoncitos ---------- */
+
+  función sparkles({ count = 10, hearts = .4, x = [.28, .72], y = [.45, .62] } = {}) {
+    const em = parseFloat(getComputedStyle(stage).fontSize);
+    para (sea i = 0; i < count; i++) {
+      const isHeart = Math.random() < corazones;
+      const tamaño = esCorazón ? rand(.9, 1.7) : rand(.8, 1.7);
+      const item = document.createElement('span');
+      item.className = 'fx-item ' + (isHeart ? 'fx-heart' : 'spark');
+      item.style.cssText =
+        `izquierda:${rand(x[0], x[1]) * 100}%;arriba:${rand(y[0], y[1]) * 100}%;` +
+        `ancho:${size}em;alto:${size}em;margen:${-size / 2}em 0 0 ${-size / 2}em;`;
+      si (esCorazón) {
+        item.innerHTML = CORAZÓN;
+        item.style.color = pick(['#ff6f96', '#ff9ab5', '#f2557f', '#ffb3c6']);
+      }
+      fx.append(item);
+
+      const dx = rand(-9, 9) * em;
+      const dy = -rand(5, 17) * em;
+      const anim = item.animate([
+        { transform: 'translate(0,0) scale(.2) rotate(0deg)', opacity: 0 },
+        { opacidad: 1, desplazamiento: .3 },
+        { transform: `translate(${dx}px,${dy}px) scale(${rand(.9, 1.3)}) rotate(${rand(-60, 60)}deg)`, opacity: 0 }
+      ], { duración: rand(1400, 2600), retardo: rand(0, 600), suavizado: 'cubic-bezier(.2,.7,.3,1)', relleno: 'ambos' });
+      hecho(anime).then(() => item.remove());
+    }
+  }
+
+  /* =========================================================
+     SECUENCIA
+     1) gatito con sobre cerrado → 2) clic
+     3) gatito se acerca → 4) sobre se abre
+     5) carta sale y se acerca → 6) todo se desvanece
+     7) solo queda la carta, y el mensaje se escribe solo
+     ========================================================== */
+
+  función asíncrona start() {
+    if (estado! == 'inactivo') retorno; // evita activarla dos veces
+    estado = 'caminando';
+
+    etapa.classList.add('ocupado');
+    catBtn.setAttribute('aria-disabled', 'true');
+    catBtn.tabIndex = -1;
+    catBtn.blur();
+    eyes.style.setProperty('--ex', '0px');
+    eyes.style.setProperty('--ey', '0px');
+
+    intentar {
+      esperar a caminarAlVisualizador();
+      esperar sueño(450);
+      esperar a abrir el sobre();
+      esperar a traerLetra();
+      esperar a escribirCarta();
+      estado = 'hecho';
+    } capturar (error) {
+      console.error(err);
+      esperar showLetterFallback();
+    }
+  }
+
+  /* 3) El gatito camina (a saltitos) hacia la pantalla */
+  función asíncrona walkToViewer() {
+    escena.classList.add('caminando');
+    etapa.classList.add('caminando');
+
+    const r = stage.getBoundingClientRect();
+    const vw = ancho interno, vh = altura interna;
+    const zoom = Math.max(1.12, Math.min(vw * .96 / r.width, vh * .94 / r.height, 1.7));
+    const dx = vw / 2 - (r.left + r.width / 2);
+    const dy = vh / 2 - (r.top + r.height / 2);
+
+    pasos constantes = ¿REDUCIDO? 1:14; // 7 saltitos
+    const frames = [];
+    para (sea i = 0; i <= pasos; i++) {
+      const t = i / pasos;
+      constante p = t * t * (3 - 2 * t); // arranca y termina despacio
+      const s = 1 + (zoom - 1) * p;
+      const hop = (i % 2 === 1 && i < steps) ? -r.height * .032 * s : 0;
+      const rot = (i % 2 === 1 && i < steps) ? (Math.floor(i / 2) % 2 === 0 ? -2 : 2) : 0;
+      frames.push({
+        transformar: `translate(${dx * p}px, ${dy * p + hop}px) scale(${s}) rotate(${rot}deg)`,
+        suavizando: 'entrada y salida gradual',
+        desplazamiento: t
+      });
+    }
+
+    const walk = stage.animate(frames, { duration: REDUCED ? 1200 : 4300, fill: 'forwards' });
+    esperar a que termine(caminar);
+    stage.style.transform = `translate(${dx}px, ${dy}px) scale(${zoom})`;
+    caminar.cancelar();
+
+    etapa.classList.remove('caminando');
+    estado = 'llegado';
+  }
+
+  /* 4) El gatito abre el sobre */
+  función asíncrona openEnvelope() {
+    estado = 'apertura';
+
+    sobre.classList.add('meneo'); //pequeña expectativa
+    esperar sueño(650);
+    sobre.classList.remove('wiggle');
+
+    catSvg.classList.add('happy'); // ojitos felices
+    sobre.classList.add('abrir'); // la solapa se levanta y la carta empieza a salir
+    esperar sueño(450);
+    flap.classList.add('detrás'); // la solapa pasa por detrás de la carta
+    destellos({ recuento: 12, corazones: .3 });
+
+    esperar sueño(750);
+    destellos({ recuento: 10, corazones: .4 });
+
+    esperar a dormir(1000); // la carta termina de salir
+    destellos({ recuento: 9, corazones: .6, y: [.3, .55] });
+    esperar sueño(500);
+  }
+
+  /* 5-6) La carta avanza hacia la pantalla y lo demás se desvanece */
+  función asíncrona bringLetter() {
+    estado = 'entregando';
+
+    const r = envLetter.getBoundingClientRect();
+    const envR = envelope.getBoundingClientRect();
+    const W = paper.offsetWidth, H = paper.offsetHeight;
+    const vw = ancho interno, vh = altura interna;
+
+    // La carta final parte exactamente desde la carta que asoma del sobre
+    const sx = r.width / W, sy = r.height / H;
+    const dx = r.left + r.width / 2 - vw / 2;
+    const dy = r.top + r.height / 2 - vh / 2;
+    const visible = abrazadera((envR.top - r.top) / r.height, .05, 1); // parte que asoma
+    const hidden = ((1 - visible) * 100).toFixed(1);
+
+    paperWrap.classList.add('show');
+    envLetter.style.visibility = 'oculto';
+
+    const fly = paper.animate([
+      { transform: `translate(${dx}px, ${dy}px) scale(${sx}, ${sy}) rotate(-2deg)`, clipPath: `inset(0px 0px ${hidden}% 0px)` },
+      { transform: 'translate(0px, 0px) scale(1, 1) rotate(0deg)', clipPath: 'inset(-90px -90px -90px -90px)' }
+    ], { duración: 2300, suavizado: 'cubic-bezier(.55,.05,.15,1)', relleno: 'ambos' });
+
+    $('.paper-frame', papel).animar(
+      [{ opacidad: 0 }, { opacidad: 0, desplazamiento: .45 }, { opacidad: 1 }],
+      { duración: 2300, rellenar: 'ambos' }
+    );
+
+    // El resto de elementos se desvanece lentamente
+    const fade = (el, duration, delay = 0) =>
+      el.animate([{ opacity: 1 }, { opacity: 0 }], { duration, delay, easing: 'ease-in', fill: 'forwards' });
+    desvanecimiento(etapa, 1700, 250);
+    fade(heartsBox, 1800, 100);
+    fade(bokehBox, 1800, 100);
+    fade($('.bg-light'), 1800, 100);
+    escena.classList.add('final');
+
+    esperar a que termine(volar);
+    volar.cancelar();
+
+    // Solo queda la carta
+    [stage, heartsBox, bokehBox, $('.bg-light'), $('#intro')].forEach(el => el && el.remove());
+    paperWrap.classList.add('ready');
+    replay.classList.add('mostrar'); // botón para volver al inicio
+  }
+
+  /* 7) Texto que se escribe progresivamente */
+  función fillText(el, texto) {
+    el.textContent = '';
+    el.setAttribute('aria-label', text);
+    const caracteres = [];
+    texto.split(/\s+/).forEach((palabra, i, arr) => {
+      const w = document.createElement('span');
+      w.className = 'w';
+      w.setAttribute('aria-hidden', 'true');
+      Array.from(word).forEach(ch => {
+        const c = document.createElement('span');
+        c.className = 'c';
+        c.textContent = ch;
+        w.append(c);
+        caracteres.push(c);
+      });
+      el.append(w);
+      if (i < arr.length - 1) el.append(document.createTextNode(' '));
+    });
+    devolver caracteres;
+  }
+
+  función asíncrona typeChars(chars, caret, speed = CONFIG.velocidad) {
+    para (constante c de caracteres) {
+      c.classList.add('on');
+      c.después(caret);
+      const ch = c.textContent;
+      sea ​​d = velocidad * rand(.65, 1.35);
+      si (',;'.incluye(ch)) d += 170;
+      else if (ch === ':') d += 200;
+      else if ('.!?…'.includes(ch)) d += 420;
+      paperInner.scrollTop = paperInner.scrollHeight;
+      esperar sueño(d);
+    }
+  }
+
+  función asíncrona writeLetter() {
+    estado = 'escritura';
+    const caret = document.createElement('span');
+    caret.className = 'caret';
+
+    esperar sueño(700);
+    await typeChars(fillText(titleEl, CONFIG.titulo), caret, CONFIG.velocidad * 1.2);
+    divisor.classList.add('show');
+    esperar sueño(900);
+
+    for (texto constante de CONFIG.mensaje) {
+      const p = document.createElement('p');
+      bodyEl.append(p);
+      await typeChars(fillText(p, texto), cursor);
+      esperar sueño(700);
+    }
+
+    const p1 = document.createElement('p');
+    const p2 = document.createElement('p');
+    p2.className = 'nombre';
+    signEl.append(p1, p2);
+    await typeChars(fillText(p1, CONFIG.despedida), caret);
+    esperar sueño(350);
+    await typeChars(fillText(p2, CONFIG.remitente), caret);
+
+    const corazón = document.createElement('span');
+    corazón.className = 'fin-corazón';
+    corazón.innerHTML = CORAZÓN;
+    p2.añadir(corazón);
+    requestAnimationFrame(() => heart.classList.add('show'));
+
+    esperar sueño(900);
+    caret.remove();
+    reproducir.classList.add('show');
+  }
+
+  /* Si algo fallara, la carta igualmente se muestra */
+  función asíncrona showLetterFallback() {
+    [etapa, heartBox, bokehBox, $('#intro')].forEach(el => el && el.remove());
+    escena.classList.add('final');
+    paperWrap.classList.add('show', 'ready');
+    reproducir.classList.add('show');
+    papel.getAnimations().forEach(a => a.cancel());
+    Si (!bodyEl.children.length) esperar writeLetter();
+  }
+
+  /* ---------- Arrancar ---------- */
+
+  hacerCorazones();
+  hacerBokeh();
+
+  catBtn.addEventListener('click', start);
+  catBtn.addEventListener('keydown', e => {
+    si (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      comenzar();
+    }
+  });
+  replay.addEventListener('click', () => location.reload());
+})();
+  </script>
+</body>
+</html>
